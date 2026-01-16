@@ -1,0 +1,160 @@
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-family: sans-serif;
+  color: #333;
+}
+
+h1 { margin-bottom: 20px; }
+
+/* メニュー周り */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
+
+.checkbox-label {
+  justify-content: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* ボタン類 */
+.start-btn {
+  padding: 15px 40px;
+  font-size: 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.1s;
+}
+
+.start-btn:hover { transform: scale(1.05); background-color: #0056b3; }
+
+.restart-btn {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: transparent;
+  color: #666;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* グリッド */
+.grid {
+  display: grid;
+  gap: 8px;
+  margin: 0 auto 20px;
+  max-width: 500px; /* 画面いっぱいに広がらないように */
+}
+
+.cell {
+  aspect-ratio: 1;
+  font-size: clamp(1rem, 4vw, 2rem); /* 画面サイズに合わせて文字サイズ調整 */
+  font-weight: bold;
+  border: 1px solid #999;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+}
+
+.cell:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.cell.clicked {
+  color: #ccc;
+  border-color: #eee;
+  box-shadow: none;
+  cursor: default;
+}
+
+/* 結果画面 */
+.result-screen {
+  animation: fadeIn 0.5s;
+}
+
+.result-time {
+  font-size: 4rem;
+  color: #d32f2f;
+  margin: 10px 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ベストスコア表示用 */
+.current-best {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+  color: #666;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.best-time-value {
+  font-weight: bold;
+  color: #007bff;
+  font-size: 1.1rem;
+}
+
+.new-record {
+  color: #ff9800;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
