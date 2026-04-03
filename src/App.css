@@ -1,7 +1,9 @@
+/* --- ベーススタイル --- */
 .container {
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box; /* パディングを含めて画面幅を100%に収めるための必須設定 */
   text-align: center;
   font-family: sans-serif;
   color: #333;
@@ -9,7 +11,7 @@
 
 h1 { margin-bottom: 20px; }
 
-/* メニュー周り */
+/* --- メニュー・設定周り --- */
 .menu {
   display: flex;
   flex-direction: column;
@@ -26,22 +28,23 @@ h1 { margin-bottom: 20px; }
   padding: 20px;
   border-radius: 10px;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
 }
 
 label {
   display: flex;
   justify-content: space-between;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .checkbox-label {
   justify-content: flex-start;
   gap: 10px;
   cursor: pointer;
+  text-align: left;
 }
 
-/* ボタン類 */
+/* --- ボタン類 --- */
 .start-btn {
   padding: 15px 40px;
   font-size: 1.5rem;
@@ -77,30 +80,39 @@ label {
   margin-left: 10px;
 }
 
-/* グリッド */
+/* --- プレイ画面 --- */
+.status-bar {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+/* グリッドレイアウト */
 .grid {
   display: grid;
   gap: 8px;
   margin: 0 auto 20px;
-  max-width: 500px; /* 画面いっぱいに広がらないように */
+  width: 100%; /* max-widthの制限までは100%広がり、超えれば自動縮小する */
 }
 
+/* セル（マス目） */
 .cell {
+  width: 100%; /* gridの1frに対して100%広がる */
   aspect-ratio: 1;
-  font-size: clamp(1rem, 4vw, 2rem); /* 画面サイズに合わせて文字サイズ調整 */
+  font-size: clamp(0.9rem, 4vw, 2.2rem); /* スマホで縮小された時のために下限を0.9remに調整 */
   font-weight: bold;
   border: 1px solid #999;
   border-radius: 8px;
   cursor: pointer;
-  color: #333;
+  background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+  transition: transform 0.1s, background-color 0.2s;
 }
 
 .cell:active {
-  transform: translateY(2px);
+  transform: translateY(2px) !important;
   box-shadow: none;
 }
 
@@ -111,7 +123,17 @@ label {
   cursor: default;
 }
 
-/* 結果画面 */
+/* 動的グリッド（入れ替え時）のアニメーション */
+@keyframes spawn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.grid .cell {
+  animation: spawn 0.2s forwards;
+}
+
+/* --- 結果画面 --- */
 .result-screen {
   animation: fadeIn 0.5s;
 }
@@ -122,39 +144,15 @@ label {
   margin: 10px 0;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ベストスコア表示用 */
 .current-best {
   margin-top: 15px;
   padding-top: 15px;
   border-top: 1px solid #ddd;
   font-size: 0.9rem;
   color: #666;
-  width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
 .best-time-value {
-  font-weight: bold;
-  color: #007bff;
-  font-size: 1.1rem;
-}
-
-.new-record {
-  color: #ff9800;
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
+  font-weight
